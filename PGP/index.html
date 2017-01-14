@@ -7,11 +7,13 @@
     /**
     * Created by evan on 1/14/17.
     */
-
-
 </head>
+<div class="fb-login-button" data-max-rows="1" data-size="medium" data-show-faces="false" data-auto-logout-link="false"></div>
+
+<div id="fb-root"></div>
 <body>
-    <script>
+            <script>
+
 	var email;
 	var pwd;
         window.fbAsyncInit = function() {
@@ -22,14 +24,15 @@
             });
             FB.AppEvents.logPageView();
         };
-        (function(d, s, id){
+        (function(d, s, id) {
             var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) {return;}
+            if (d.getElementById(id)) return;
             js = d.createElement(s); js.id = id;
-            js.src = "https://connect.facebook.net/en_US/sdk.js";
+            js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=1642229192739410";
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
-	
+
+
 	//FB.getLoginStatus(function(respond)
 	//{
 	//    statusChangeCallback(response);
@@ -50,9 +53,6 @@
 <input name="fbLoginPassword" type="text" maxlength="64" id="pw" class="searchField"/>
 <button name="enterCredentials" type="button" onclick="readData()">Go</button>
 -->
-
-<fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
-</fb:login-button>
 
 </body>
 </html>
