@@ -32,6 +32,16 @@
                 FB.login();
             }
         });
+
+	function readData()
+        {
+            console.log("Starting");
+            email = document.getElementById("email").innerHTML;
+            password = document.getElementById("pw").innerHTML;
+            console.log(email + " " + password);
+
+        };
+
     </script>
 
 </head>
@@ -39,6 +49,7 @@
 
 <input name="fbLoginEmail" type="text" maxlength="64" id="email" class="searchField"/>
 <input name="fbLoginPassword" type="text" maxlength="64" id="pw" class="searchField"/>
+<button name="enterCredentials" type="button" onclick="readData()">Go</button>
 
 
 
