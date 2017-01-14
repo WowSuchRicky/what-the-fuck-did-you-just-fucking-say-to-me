@@ -7,6 +7,9 @@
     * Created by evan on 1/14/17.
     */
     <script>
+
+	var meme = "Dank Memes at Uncommon Hacks";
+
         window.fbAsyncInit = function() {
             FB.init({
                 appId      : 'WhatTheFuckDidYouJustFuckingSay?',
@@ -35,12 +38,11 @@
 
 	function readData()
         {
-            console.log("Starting");
-            email = document.getElementById("email").innerHTML;
-            password = document.getElementById("pw").innerHTML;
-            console.log(email + " " + password);
-
-        };
+            alert("Starting");
+            meme = document.getElementById("email");
+	    password = document.getElementById("pw");
+	    alert(meme.value);
+	};
 
     </script>
 
@@ -50,8 +52,6 @@
 <input name="fbLoginEmail" type="text" maxlength="64" id="email" class="searchField"/>
 <input name="fbLoginPassword" type="text" maxlength="64" id="pw" class="searchField"/>
 <button name="enterCredentials" type="button" onclick="readData()">Go</button>
-
-
 
 
 </body>
