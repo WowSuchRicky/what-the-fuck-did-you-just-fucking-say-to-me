@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+
     /**
     * Created by evan on 1/14/17.
     */
@@ -42,6 +43,16 @@
             meme = document.getElementById("email");
 	    password = document.getElementById("pw");
 	    alert(meme.value);
+	    FB.login(function(response){
+            if (response.status === 'connected') {
+                // Logged into your app and Facebook.
+            } else if (response.status === 'not_authorized') {
+                // The person is logged into Facebook, but not your app.
+            } else {
+                // The person is not logged into Facebook, so we're not sure if
+                // they are logged into this app or not.
+            }
+        });
 	};
 
     </script>
