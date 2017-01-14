@@ -6,53 +6,52 @@
     /**
     * Created by evan on 1/14/17.
     */
+
+
+</head>
+<body>
     <script>
-
-	var meme = "Dank Memes at Uncommon Hacks";
-
+	var email;
+	var pwd;
         window.fbAsyncInit = function() {
             FB.init({
-                appId      : 'WhatTheFuckDidYouJustFuckingSay?',
+                appId      : '1642229192739410:',
                 xfbml      : true,
                 version    : 'v2.8'
             });
             FB.AppEvents.logPageView();
         };
-
         (function(d, s, id){
             var js, fjs = d.getElementsByTagName(s)[0];
             if (d.getElementById(id)) {return;}
             js = d.createElement(s); js.id = id;
-            js.src = "//connect.facebook.net/en_US/sdk.js";
+            js.src = "https://connect.facebook.net/en_US/sdk.js";
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
+	
+	//FB.getLoginStatus(function(respond)
+	//{
+	//    statusChangeCallback(response);
+	//});
 
-        FB.getLoginStatus(function(response) {
-            if (response.status === 'connected') {
-                console.log('Logged in.');
-            }
-            else {
-                FB.login();
-            }
-        });
 
 	function readData()
         {
-            alert("Starting");
-            meme = document.getElementById("email");
-	    password = document.getElementById("pw");
-	    alert(meme.value);
+            email = document.getElementById("email");
+	    pwd = document.getElementById("pw");
+	    console.log(email.value);
+	    console.log(pwd.value);
 	};
 
     </script>
 
-</head>
-<body>
-
-<input name="fbLoginEmail" type="text" maxlength="64" id="email" class="searchField"/>
+<!--<input name="fbLoginEmail" type="text" maxlength="64" id="email" class="searchField"/>
 <input name="fbLoginPassword" type="text" maxlength="64" id="pw" class="searchField"/>
 <button name="enterCredentials" type="button" onclick="readData()">Go</button>
+-->
 
+<fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+</fb:login-button>
 
 </body>
 </html>
