@@ -1,7 +1,0 @@
-// current chat class: _23_m
-// current chat's messages: _58nk
-
-var messages = document.getElementsByClassName("_58nk")
-for(var message of messages) {
-    message.innerHTML = "";
-}
