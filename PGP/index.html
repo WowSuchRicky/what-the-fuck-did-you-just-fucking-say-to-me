@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    /**
+    * Created by evan on 1/14/17.
+    */
+    <script>
+        window.fbAsyncInit = function() {
+            FB.init({
+                appId      : 'WhatTheFuckDidYouJustFuckingSay?',
+                xfbml      : true,
+                version    : 'v2.8'
+            });
+            FB.AppEvents.logPageView();
+        };
+
+        (function(d, s, id){
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {return;}
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+
+        FB.getLoginStatus(function(response) {
+            if (response.status === 'connected') {
+                console.log('Logged in.');
+            }
+            else {
+                FB.login();
+            }
+        });
+    </script>
+
+</head>
+<body>
+
+<input name="fbLoginEmail" type="text" maxlength="64" id="email" class="searchField"/>
+<input name="fbLoginPassword" type="text" maxlength="64" id="pw" class="searchField"/>
+
+
+
+
+</body>
+</html>
