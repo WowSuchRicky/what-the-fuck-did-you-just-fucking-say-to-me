@@ -48,11 +48,15 @@ setTimeout(function() {
         if(numMessages >= GetMessages().length + GetCodeSnippets().length) {
             AddDecryptClassTag(function() {
                 let decryptedMessages = GetDecryptedMessages();
-                numMessages = decryptedMessages.length
-                console.log(decryptedMessages);
-                chrome.runtime.sendMessage({Messages: decryptedMessages}, function(response) {
-                    console.log(response.EncryptedMessages)
-                });
+                numMessages = decryptedMessages.length;
+
+                for(let message of decryptedMessages) {
+                    chrome.runtime.sendMessage({message: message.innerHTML}, function(response) {
+                        console.log(response.message);
+                        message.innerHTML = response.message;
+                        console.log(message.innerHTML);
+                    });
+                }
             });
         }
     }, 1000);
