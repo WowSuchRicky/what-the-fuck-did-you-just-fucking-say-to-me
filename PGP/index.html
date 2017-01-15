@@ -7,52 +7,22 @@
     /**
     * Created by evan on 1/14/17.
     */
+    <div class="fb-login-button" data-max-rows="1" data-size="medium" data-show-faces="false" data-auto-logout-link="false"></div>
 </head>
-<div class="fb-login-button" data-max-rows="1" data-size="medium" data-show-faces="false" data-auto-logout-link="false"></div>
-
-<div id="fb-root"></div>
 <body>
-            <script>
+<div id="fb-root"></div>
+    <script>
 
-	var email;
-	var pwd;
-        window.fbAsyncInit = function() {
-            FB.init({
-                appId      : '1642229192739410:',
-                xfbml      : true,
-                version    : 'v2.8'
-            });
-            FB.AppEvents.logPageView();
-        };
         (function(d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) return;
-            js = d.createElement(s); js.id = id;
-            js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=1642229192739410";
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
-
-
-	//FB.getLoginStatus(function(respond)
-	//{
-	//    statusChangeCallback(response);
-	//});
-
-
-	function readData()
-        {
-            email = document.getElementById("email");
-	    pwd = document.getElementById("pw");
-	    console.log(email.value);
-	    console.log(pwd.value);
-	};
-
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) {
+                    return;
+                }
+                js = d.createElement(s);
+                js.id = id;
+                js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=1642229192739410";
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
     </script>
-
-<!--<input name="fbLoginEmail" type="text" maxlength="64" id="email" class="searchField"/>
-<input name="fbLoginPassword" type="text" maxlength="64" id="pw" class="searchField"/>
-<button name="enterCredentials" type="button" onclick="readData()">Go</button>
--->
-
 </body>
 </html>
