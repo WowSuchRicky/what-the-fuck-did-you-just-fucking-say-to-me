@@ -1,8 +1,6 @@
 import "babel-polyfill";
 import openpgp from "../openpgp.min.js";
-
-// current chat class: _23_m
-// current chat's messages: _58n
+import FacebookScraper from "./facebookScraper.js"
 
 export default class EncryptMessages {
 
@@ -14,12 +12,12 @@ export default class EncryptMessages {
     }
 
     async addDecryptClassTagAsync() {
-        let codeSnippets = document.getElementsByClassName("_wu0");
+        let codeSnippets = FacebookScraper.GetCodeSnippets();
         for(let message of codeSnippets) {
             message.getElementsByTagName("div")[0].className += " dec";
         }
 
-        let messages = document.getElementsByClassName("_58nk");
+        let messages = FacebookScraper.GetMessages();
         for(let message of messages) {
             message.className += " dec"
         }
@@ -28,12 +26,12 @@ export default class EncryptMessages {
     async encryptMessagesAsync() {
         await addDecryptClassTagAsync();
 
-        let decMessages = document.getElementsByClassName("dec");
+        let decMessages = FacebookScraper.GetDecryptedMessages();
         for(let decMessage of decMessages) {
             openpgp.encrypt(options).then((ciphertext) => {
                 let encrypted = ciphertext.message.packets.write();
                 decMessage.innerHTML = encrypted;
-            })
+            });
         }
-    } 
+    }
 };

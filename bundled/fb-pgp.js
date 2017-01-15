@@ -11843,12 +11843,11 @@ var _openpgpMin = require("../openpgp.min.js");
 
 var _openpgpMin2 = _interopRequireDefault(_openpgpMin);
 
-function _interopRequireDefault(obj) {
-    return obj && obj.__esModule ? obj : { default: obj };
-}
+var _facebookScraper = require("./facebookScraper.js");
 
-// current chat class: _23_m
-// current chat's messages: _58n
+var _facebookScraper2 = _interopRequireDefault(_facebookScraper);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 class EncryptMessages {
 
@@ -11860,51 +11859,100 @@ class EncryptMessages {
     }
 
     addDecryptClassTagAsync() {
+        var codeSnippets, message, messages;
         return regeneratorRuntime.async(function _callee$(_context) {
             while (1) switch (_context.prev = _context.next) {
                 case 0:
-                    // let codeSnippets = document.getElementsByClassName("_wu0");
-                    // for(let message of codeSnippets) {
-                    //     message.getElementsByTagName("div")[0].className += " dec";
-                    // }
+                    codeSnippets = _facebookScraper2.default.GetCodeSnippets();
 
-                    // let messages = document.getElementsByClassName("_58nk");
-                    // for(let message of messages) {
-                    //     message.className += " dec"
-                    // }
-                    console.log("Hello");
+                    for (message of codeSnippets) {
+                        message.getElementsByTagName("div")[0].className += " dec";
+                    }
 
-                case 1:
+                    messages = _facebookScraper2.default.GetMessages();
+
+                    for (message of messages) {
+                        message.className += " dec";
+                    }
+
+                case 4:
                 case "end":
                     return _context.stop();
             }
         }, null, this);
     }
 
-    encryptMessages() {
-        // let decMessages = document.getElementsByClassName("dec");
-        // for(let decMessage of decMessages) {
-        //     openpgp.encrypt(options).then((ciphertext) => {
-        //         let encrypted = ciphertext.message.packets.write();
-        //         decMessage.innerHTML = encrypted;
-        //     })
-        // }
-        console.log("World");
-    }
+    encryptMessagesAsync() {
+        var decMessages, decMessage, encrypted;
+        return regeneratorRuntime.async(function _callee2$(_context2) {
+            while (1) switch (_context2.prev = _context2.next) {
+                case 0:
+                    _context2.next = 2;
+                    return regeneratorRuntime.awrap(addDecryptClassTagAsync());
 
+                case 2:
+                    decMessages = _facebookScraper2.default.GetDecryptedMessages();
+
+                    for (decMessage of decMessages) {
+                        _openpgpMin2.default.encrypt(options).then(ciphertext => {
+                            encrypted = ciphertext.message.packets.write();
+
+                            decMessage.innerHTML = encrypted;
+                        });
+                    }
+
+                case 4:
+                case "end":
+                    return _context2.stop();
+            }
+        }, null, this);
+    }
 }exports.default = EncryptMessages;
 ;
 
-},{"../openpgp.min.js":298,"babel-polyfill":1}],300:[function(require,module,exports){
+},{"../openpgp.min.js":298,"./facebookScraper.js":300,"babel-polyfill":1}],300:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+class FacebookScraper {
+
+    static GetMessages() {
+        return document.getElementsByClassName("_58nk");
+    }
+
+    static GetCodeSnippets() {
+        return document.getElementsByClassName("_wu0");
+    }
+
+    static GetEncryptedMessages() {
+        return document.getElementsByClassName("enc");
+    }
+
+    static GetDecryptedMessages() {
+        return document.getElementsByClassName("dec");
+    }
+
+    static GetuserName() {
+        let profileURL = document.querySelectorAll("a._3oh-").innerHTML;
+        return profileURL.substr(profileURL.lastIndexOf('/') + 1);
+    }
+
+    static GetName() {
+        return document.querySelectorAll("div._3eur")[0].children[0].innerHTML;
+    }
+}
+exports.default = FacebookScraper;
+
+},{}],301:[function(require,module,exports){
 "use strict";
 
 var _encrypt = require("./encrypt.js");
 
 var _encrypt2 = _interopRequireDefault(_encrypt);
 
-function _interopRequireDefault(obj) {
-    return obj && obj.__esModule ? obj : { default: obj };
-}
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 (function _callee() {
     var encrypt;
@@ -11913,16 +11961,13 @@ function _interopRequireDefault(obj) {
             case 0:
                 encrypt = new _encrypt2.default(new Uint8Array([0x01, 0x01, 0x01]), ['secret stuff'], false);
                 _context.next = 3;
-                return regeneratorRuntime.awrap(encrypt.addDecryptClassTagAsync());
+                return regeneratorRuntime.awrap(encrypt.encryptMessages());
 
             case 3:
-                encrypt.encryptMessages();
-
-            case 4:
             case "end":
                 return _context.stop();
         }
     }, null, this);
 })();
 
-},{"./encrypt.js":299}]},{},[300]);
+},{"./encrypt.js":299}]},{},[301]);

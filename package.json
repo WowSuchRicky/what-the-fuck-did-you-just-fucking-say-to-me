@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "babel --presets node6 ./src -d ./release",
-    "browserify": "browserify ./release/main.js  -o ./bundled/fb-pgp.js -t [ babelify --presets [ node6 ] ]"
+    "bundle": "browserify ./src/main.js  -o ./bundled/fb-pgp.js -t babelify"
   },
   "repository": {
     "type": "git",
