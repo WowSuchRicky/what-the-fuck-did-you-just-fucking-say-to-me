@@ -79,11 +79,17 @@
   function testAPI() {
     console.log('Welcome!  Fetching your information.... ');
     FB.api('/me', function(response) {
+	console.log(response)
       console.log('Successful login for: ' + response.name);
       document.getElementById('status').innerHTML =
         'Thanks for logging in, ' + response.name + '!';
     });
-  }
+	
+    FB.api('/me/friends', function(response) {
+	console.log(response)
+    });  
+
+}
 </script>
 
 <!--
@@ -92,8 +98,7 @@
   the FB.login() function when clicked.
 -->
 
-<fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
-</fb:login-button>
+<div class="fb-login-button" scope="public_profile,email,user_friends" data-max-rows="1" data-size="medium" data-show-faces="false" data-auto-logout-link="false"></div>
 
 <div id="status">
 </div>
