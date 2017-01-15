@@ -4,12 +4,13 @@ import openpgp from "../openpgp.min.js";
 // current chat class: _23_m
 // current chat's messages: _58n
 
-export default class encryptMessages {
+export default class EncryptMessages {
 
     constructor(data, passwords, armor) {
+        this.options = {}
         this.options.data = data;
         this.options.passwords = passwords;
-        this.armor = armor;
+        this.options.armor = armor;
     }
 
     async addDecryptClassTagAsync() {
@@ -25,7 +26,7 @@ export default class encryptMessages {
     }
 
     encryptMessages() {
-        var decMessages = document.getElementsByClassName("dec");
+        let decMessages = document.getElementsByClassName("dec");
         for(let decMessage of decMessages) {
             openpgp.encrypt(options).then((ciphertext) => {
                 let encrypted = ciphertext.message.packets.write();
@@ -33,5 +34,4 @@ export default class encryptMessages {
             })
         }
     } 
-
 };
