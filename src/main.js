@@ -238,19 +238,20 @@ rIOxbMdyuaWNxA==
 -----END PGP PRIVATE KEY BLOCK-----`
 
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-    console.log(request.message)
     let options = {
-        "message": openpgp.message.readArmored(request.message),
-        "publicKeys": openpgp.key.readArmored(publicKey).keys,
-        "privateKeys": openpgp.key.readArmored(privateKey).keys[0]
+        message: openpgp.message.readArmored(request.message),
+        //publicKeys: openpgp.key.readArmored(publicKey).keys,
+        privateKeys: openpgp.key.readArmored(privateKey).keys[0]
     }
 
-    openpgp.decrypt(options).then(function(plaintext) {
+    openpgp.decrypt(options)
+    .then(function(plaintext) {
         let decrypted = plaintext.data;
         console.log(decrypted);
         sendResponse({message: decrypted});
     })
-    .catch(function() {
+    .catch(function(err) {
+        console.log(err.message);
         sendResponse({message: "Failed To Decrypt"})
-    })
+    });
 });
