@@ -27,14 +27,14 @@ function AddEncryptClassTag(callback) {
     let codeSnippets = GetCodeSnippets();
     for(let message of codeSnippets) {
         let element = message.children[0]
-        if(!element.className.includes("enc") && element.innerHTML.includes("-----BEGIN")) {
+        if(!element.className.includes("enc") && element.innerHTML.includes("-----BEGIN PGP MESSAGE-----")) {
             element.className += " enc";      
         }
     }
 
     let messages = GetMessages();
     for(let message of messages) {
-        if(!message.className.includes("enc") && message.innerHTML.includes("-----BEGIN")) {
+        if(!message.className.includes("enc") && message.innerHTML.includes("-----BEGIN PGP MESSAGE-----")) {
             message.className += " enc";      
         }
     }
@@ -51,6 +51,7 @@ setTimeout(function() {
                 numMessages = decryptedMessages.length;
                 for(let message of decryptedMessages) {
                     chrome.runtime.sendMessage({message: message.innerHTML}, function(response) {
+                        console.log(response);
                         message.innerHTML = response.message;
                     });
                 }
