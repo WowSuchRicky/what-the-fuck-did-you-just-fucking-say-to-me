@@ -26,7 +26,7 @@ function GetName() {
 function AddDecryptClassTag(callback) {
     let codeSnippets = GetCodeSnippets();
     for(let message of codeSnippets) {
-        let element = message.getElementsByTagName("div")[0]
+        let element = message.children[0]
         if(!element.className.includes("dec")) {
             message.getElementsByTagName("div")[0].className += " dec";      
         }
@@ -34,8 +34,7 @@ function AddDecryptClassTag(callback) {
 
     let messages = GetMessages();
     for(let message of messages) {
-        let element = message.getElementsByTagName("div")[0]
-        if(!element.className.includes("dec")) {
+        if(!message.className.includes("dec")) {
             message.getElementsByTagName("div")[0].className += " dec";      
         }
     }
@@ -43,13 +42,13 @@ function AddDecryptClassTag(callback) {
     callback();
 }
 
-(function() {
+setTimeout(function() {
     let numMessages = GetMessages().length + GetCodeSnippets().length;
-    window.setTimeout(function() {
+    setInterval(function() {
         if(numMessages >= GetMessages().length + GetCodeSnippets().length) {
             AddDecryptClassTag(function() {
                 let decryptedMessages = GetDecryptedMessages();
-                numMessages = decryptedMessages.length;
+                numMessages = decryptedMessages.length
                 console.log(decryptedMessages);
                 chrome.runtime.sendMessage({Messages: decryptedMessages}, function(response) {
                     console.log(response.EncryptedMessages)
@@ -57,4 +56,4 @@ function AddDecryptClassTag(callback) {
             });
         }
     }, 1000);
-})();
+}, 10000);
