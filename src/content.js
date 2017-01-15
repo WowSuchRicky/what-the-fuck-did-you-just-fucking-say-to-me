@@ -28,14 +28,14 @@ function AddDecryptClassTag(callback) {
     for(let message of codeSnippets) {
         let element = message.children[0]
         if(!element.className.includes("dec")) {
-            message.getElementsByTagName("div")[0].className += " dec";      
+            element.className += " dec";      
         }
     }
 
     let messages = GetMessages();
     for(let message of messages) {
         if(!message.className.includes("dec")) {
-            message.getElementsByTagName("div")[0].className += " dec";      
+            message.className += " dec";      
         }
     }
 
@@ -56,4 +56,4 @@ setTimeout(function() {
             });
         }
     }, 1000);
-}, 10000);
+}, 3000);
