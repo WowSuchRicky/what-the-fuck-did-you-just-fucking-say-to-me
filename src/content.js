@@ -23,19 +23,19 @@ function GetName() {
     return document.querySelectorAll("div._3eur")[0].children[0].innerHTML;
 }
 
-function AddDecryptClassTag(callback) {
+function AddEncryptClassTag(callback) {
     let codeSnippets = GetCodeSnippets();
     for(let message of codeSnippets) {
         let element = message.children[0]
-        if(!element.className.includes("dec")) {
-            element.className += " dec";      
+        if(!element.className.includes("enc") && element.innerHTML.includes("-----BEGIN")) {
+            element.className += " enc";      
         }
     }
 
     let messages = GetMessages();
     for(let message of messages) {
-        if(!message.className.includes("dec")) {
-            message.className += " dec";      
+        if(!message.className.includes("enc") && message.innerHTML.includes("-----BEGIN")) {
+            message.className += " enc";      
         }
     }
 
@@ -46,10 +46,9 @@ setTimeout(function() {
     let numMessages = GetMessages().length + GetCodeSnippets().length;
     setInterval(function() {
         if(numMessages >= GetMessages().length + GetCodeSnippets().length) {
-            AddDecryptClassTag(function() {
-                let decryptedMessages = GetDecryptedMessages();
+            AddEncryptClassTag(function() {
+                let decryptedMessages = GetEncryptedMessages();
                 numMessages = decryptedMessages.length;
-
                 for(let message of decryptedMessages) {
                     chrome.runtime.sendMessage({message: message.innerHTML}, function(response) {
                         message.innerHTML = response.message;

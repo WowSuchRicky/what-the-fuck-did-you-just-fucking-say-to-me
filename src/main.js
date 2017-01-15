@@ -1,18 +1,3 @@
-function EncryptMessage(data, publicKey, privateKey) {
-    let options = {
-        "data": data,
-        "publicKeys": openpgp.key.readArmored(publicKey).keys,
-        "privateKeys": openpgp.key.readArmored(privateKey).keys
-    }
-
-    let encrypted = ""
-    openpgp.encrypt(options).then(function(ciphertext) {
-        console.log(ciphertext);
-        encrypted = ciphertext.data;
-    });
-    return encrypted;
-}
-
 let publicKey = 
 `-----BEGIN PGP PUBLIC KEY BLOCK-----
 Version: GnuPG v1
@@ -253,6 +238,16 @@ rIOxbMdyuaWNxA==
 -----END PGP PRIVATE KEY BLOCK-----`
 
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-    let encryptedMessage = EncryptMessage(request.message, publicKey, privateKey);
-    sendResponse({message: encryptedMessage});
+    console.log(request.message)
+    let options = {
+        "message": openpgp.message.readArmored(request.message),
+        "publicKeys": openpgp.key.readArmored(publicKey).keys,
+        "privateKeys": openpgp.key.readArmored(privateKey).keys
+    }
+
+    openpgp.decrypt(options).then(function(plaintext) {
+        let decrypted = plaintext.data;
+        console.log(decrypted);
+        sendResponse({message: decrypted});
+    });
 });
