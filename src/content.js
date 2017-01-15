@@ -52,9 +52,7 @@ setTimeout(function() {
 
                 for(let message of decryptedMessages) {
                     chrome.runtime.sendMessage({message: message.innerHTML}, function(response) {
-                        console.log(response.message);
                         message.innerHTML = response.message;
-                        console.log(message.innerHTML);
                     });
                 }
             });
