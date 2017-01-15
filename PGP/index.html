@@ -86,7 +86,19 @@
     });
 	
     FB.api('/me/friends', function(response) {
-	console.log(response)
+	console.log(response);
+
+  var responseValues = respond;
+
+  for(i = 0 ; i < responseValues.length; i++)
+  {
+    FB.api('/' + responsValues[i].id, function(response){
+      console.log(response);
+    })
+  }
+
+
+
     });  
 
 }
