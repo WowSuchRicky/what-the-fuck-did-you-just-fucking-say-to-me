@@ -25,7 +25,9 @@ export default class EncryptMessages {
         }
     }
 
-    encryptMessages() {
+    async encryptMessagesAsync() {
+        await addDecryptClassTagAsync();
+
         let decMessages = document.getElementsByClassName("dec");
         for(let decMessage of decMessages) {
             openpgp.encrypt(options).then((ciphertext) => {
